@@ -1,37 +1,43 @@
 package GraphRelated;
 
-import java.util.Queue;
-import java.util.LinkedList;
+import java.util.Stack;
 
 /**
- * Created by seradam on 2017.04.26..
+ * Created by seradam on 2017.04.27..
  */
-public class BreadthFirstSearch {
+public class DepthFirstSearch {
 
-    public int search(Node start, Node goal){
+    public int search(Node start, Node goal) {
         Node current = start;
-        Queue<Node> queue = new LinkedList<>();
-        queue.add(current);
+        Stack<Node> stack = new Stack<>();
+        stack.push(current);
         current.isVisited = true;
-        while (queue.peek() != null){
+        System.out.println(current.data);
+        while (!stack.empty()){
             if (current == goal){
                 return current.data;
             }
-            for (Node n : current.connections){
+            for(Node n : current.connections){
                 if(!n.isVisited){
-                    queue.add(n);
+                    stack.push(n);
                     n.isVisited = true;
+                    System.out.println(stack.peek().data);
+                    current = stack.peek();
+                    break;
+                }
+                else if (n == current.connections.get(current.connections.size() - 1)){
+                    stack.pop();
+                    if (!stack.empty()){
+                        current = stack.peek();
+                    }
                 }
             }
-            System.out.println(queue.peek().data);
-            current = queue.remove();
         }
         return -1;
     }
 
-
     public static void main(String[] args) {
-        BreadthFirstSearch bfs = new BreadthFirstSearch();
+        DepthFirstSearch dfs = new DepthFirstSearch();
         Node a = new Node(1);
         Node b = new Node(2);
         Node c = new Node(3);
@@ -54,10 +60,10 @@ public class BreadthFirstSearch {
         f.addConnection(c);
         g.addConnection(c);
         h.addConnection(d);
-//        a.addConnection(h);
-//        h.addConnection(a);
+//        e.addConnection(h);
+//        h.addConnection(e);
 
-        bfs.search(a,f);
+        dfs.search(a,e);
 
     }
 }

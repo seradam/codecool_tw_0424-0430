@@ -50,6 +50,8 @@ public class BreadthFirstTraversal {
         f.addConnection(c);
         g.addConnection(c);
         h.addConnection(d);
+//        a.addConnection(h);
+//        h.addConnection(a);
 
         bft.traversal(a);
 

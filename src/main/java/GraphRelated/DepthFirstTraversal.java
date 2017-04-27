@@ -59,6 +59,8 @@ public class DepthFirstTraversal {
         f.addConnection(c);
         g.addConnection(c);
         h.addConnection(d);
+//        e.addConnection(h);
+//        h.addConnection(e);
 
         dft.traversal(a);
 
